@@ -16,12 +16,12 @@ from nltk.corpus import stopwords
 
 # function to perform basic cleaning
 def basic_clean(string):
-'''Takes in a string and performs basic cleaning like removing unnecessary characters, accents'''
+    '''Takes in a string and performs basic cleaning like removing unnecessary characters, accents'''
 
     string = string.lower()
     string = unicodedata.normalize('NFKD', string).encode('ascii', 'ignore')\
             .decode('utf-8', 'ignore')
-    string = re.sub(r"[^a-z0-9'\s]", '', string)
+    string = re.sub(r"[^a-z0-9\s]", '', string)
     
     return string
     
@@ -35,7 +35,7 @@ def tokenize(string):
 
 # function to stem
 def stem(string):
-'''Takes in a string and returns a string after applying stemming to all the words '''
+    '''Takes in a string and returns a string after applying stemming to all the words '''
 
     ps = nltk.porter.PorterStemmer()
     stems = [ps.stem(word) for word in string.split()]
@@ -46,7 +46,7 @@ def stem(string):
 # function to lemmatize
 def lemmatize(string):
 
-'''Accepts some text and return the text after applying lemmatization to each word.'''
+    '''Accepts some text and return the text after applying lemmatization to each word.'''
     wnl = nltk.stem.WordNetLemmatizer()
     lemmas = [wnl.lemmatize(word) for word in string.split()]
     string_lemmatized = ' '.join(lemmas)
@@ -56,9 +56,9 @@ def lemmatize(string):
 
 # function to remove stop words
 def remove_stopwords(string, extra_words = [], exclude_words= []):
-'''Accepts some text and return the text after removing all the stopwords.
-Also takes two optional parameters, extra_words and exclude_words.
- These parameters define any additional stop words to include, and any words that we don't want to remove.'''
+    '''Accepts some text and return the text after removing all the stopwords.
+    Also takes two optional parameters, extra_words and exclude_words.
+    These parameters define any additional stop words to include, and any words that we don't want to remove.'''
 
     stopword_list = stopwords.words('english')
     for word in extra_words:
